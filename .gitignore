@@ -1,0 +1,21 @@
+1 # Compiled Object files 
+2 *.slo 
+3 *.lo 
+4 *.o 
+5 
+ 
+6 # Compiled Dynamic libraries 
+7 *.so 
+8 *.dylib 
+9 
+ 
+10 # Compiled Static libraries 
+11 *.lai 
+12 *.la 
+13 *.a 
+14 
+ 
+15 #make commits smaller but need to be built on client befor being used 
+16 *.sdf 
+17 *.suo 
+18 Debug 
