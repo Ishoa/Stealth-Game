@@ -1,1 +1,43 @@
 Mid Term Review
+
+Distance between two points in space = End - Start
+Delta = End - Start
+Difference between two points
+Length between the two points is called the magnitude which is derived using the pythagorean theorum a^2+b^2=c^2
+Find stearing force using magnitude between max velocity vector 
+and desired location using pythagorean theorum= steering force acceleration.
+Seek !uses this steering force behavior, a few other steering algorithms
+flee:!
+hide:
+arrive:!
+wander:!
+PathFollow!
+Obstacle Avoid:!
+evade:!
+Pursuit:!
+flocking:! separation, cohesion, alignment
+
+Finite State Machine: behaviors that can be swaped in and out
+Enter:adding a behavior
+Execute:doing the behavior
+Exit:removing the behavior
+
+FuzzyLogic = adding a weight to a steering behavior  (or any kind of decision making process)
+by degree of membershio (how strongly to weight merged steering behaviors)
+example: flee*2f+seek*3f
+
+Graph: List of Nodes and edges (node a position, edge cost to travel to another node)
+usable in navigation graphs , decision trees,
+dijkstra: does all the searches considers all ossibilities until it finds its search O(N^2) operation for one node
+for an entire graph it woudl be N*o(n^) = 0(n^3) whenever the graph changes
+Hueristic(just a best guess at what is right or wrong, simle ule which we use to make dicisions quickly,
+but it can be confounded and causes trouble)
+A*: has a hueristic value and searches in its general direction to avoid exhausted searches. 
+feels like Log(n) whenever u need to do a search
+usually in navigation grapsh uses distance between where you are and where you think you should be
+better w large data and dynamic data
+
+Good AI: 
+Step 1: make it perfect (reflexes are faster, pathing is better, makes better decisions than the player)
+Step 2: make it randomly fail (if the randomness can be set then you can scale the difficulty,
+less random more difficult, more random less difficult)
