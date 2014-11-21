@@ -34,3 +34,7 @@ Mid Term Review
 41 Step 1: make it perfect (reflexes are faster, pathing is better, makes better decisions than the player) 
 42 Step 2: make it randomly fail (if the randomness can be set then you can scale the difficulty, 
 43 less random more difficult, more random less difficult) 
+44 
+45 Markov chain is basically a fuzzified state machine that uses degrees of membership
+46 to go between states isntead of if statements
+47 
