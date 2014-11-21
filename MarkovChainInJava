@@ -1,0 +1,106 @@
+package gsp315;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Vector;
+
+public class MarkovText {
+	public static class MarkovNode{
+		/**what text is this stroring*/
+		public String text;
+		public Vector<MarkovEdge> edges = new Vector<MarkovEdge>();
+		/**if this word has not been added before, it will create a new node
+		 * otherwise it will return the node that existed before, and increment
+		 * the degree of membership
+		 **/
+		public MarkovNode addWordConnection(String theNextWord,
+				Map<String,MarkovNode> map){
+			MarkovEdge e=null;
+			for(int i=0;i<edges.size();++i){
+				if(edges.get(i).to.text.equals(theNextWord)){
+					e=edges.get(i);
+				}
+			}
+			if(e==null){
+				MarkovNode n = map.get(theNextWord);
+				if(n==null) {
+					n= new MarkovNode(theNextWord); 
+					map.put(theNextWord, n);
+				}
+				e=new MarkovEdge(this,n);
+				edges.add(e);
+			}
+			e.degreeOfMembership++;
+			return e.to;
+		}
+		public MarkovNode(String t){text=t;}
+		int randomIndex(){
+			float total = 0;
+			for(int i = 0;i<edges.size();++i){
+				total += edges.get(i).degreeOfMembership;
+			}
+			float randomNumber =(float)(total*Math.random());
+			for(int i=0;i<edges.size();++i){
+				randomNumber -=edges.get(i).degreeOfMembership;
+				if(randomNumber<0) return i;
+			}
+			return -1;
+		}
+		public MarkovNode next(){return edges.get(randomIndex()).to;}
+	}
+	public static class MarkovEdge{
+		public MarkovNode to, from;
+		public MarkovEdge(MarkovNode f, MarkovNode t){from=f;to=t;}
+		/**going to be the degree of membership for the markov chain*/
+		public float degreeOfMembership;
+	}
+	
+	public static void main(String[] args){
+		System.out.println("Hello World");
+		
+		String sourceText = 
+				
+"Leonardo Sinisgalli (1908–1981) was an Italian poet and art critic active from the 1930s to the 1970s."
++"Sinisgalli was born in Montemurro, Basilicata. His early education and careers led to him being called the \"engineer poet\"."
++"In 1925, Sinisgalli moved to Rome where he studied engineering and mathematics. After completing his engineering degree in 1932, he moved to Milan where he worked as an architect and graphic artist. He was a close friend of the poet Giuseppe Ungaretti and painter Scipione. He worked at Milan for architecture and graphic design projects."
++"Sinisgalli's early collections such as Cuore (1927), 18 poesie (1936), Campi Elisi (1939) focused on themes from ancenstral southern Italian myths. Later he explored a more relaxed style in I nuovi Campi Elisi (1947), La Vigna vecchia (1952), L'età della luna (1962), Il passero e il lebbroso (1970), Mosche in bottiglia (1975) and Dimenticatoio (1978). He authored prose that analyzed the conflicts of existentialism and realism such as Fiori pari, fiori dispari (1945) and Belliboschi (1948). He also explored the scientific culture of the day in Furor mathematicus (1944) and Horror vacui (1945)."
++"Sinisgalli founded and managed the magazine Civiltà delle Macchine (1953–1959), and was a member of the Scuola Romana. He also created two documentaries which consecutively won the Biennale di Venezia awards and edited radio broadcasting programs."
++"He died in Rome in 1981.";
+		System.out.println(sourceText);
+		String[] allTheWords = sourceText.split("[ .,\";\']");
+		for(int i=0;i< allTheWords.length; ++i){
+			System.out.println(allTheWords[i]);
+		}
+		MarkovNode start = new MarkovNode(allTheWords[0]);
+		MarkovNode n = start;
+		Map<String,MarkovNode> map = new HashMap<String, MarkovNode>();
+		map.put(allTheWords[0], start);
+		String s;
+		for(int i = 1;i<allTheWords.length;++i){
+			s=allTheWords[i];
+			if(s.length() ==0) s=";";
+			n=n.addWordConnection(s, map);
+		}
+		Iterator<Entry<String,MarkovNode>> it = map.entrySet().iterator();//java.util
+		while(it.hasNext()){
+			Map.Entry<String,MarkovNode> pairs = it.next();//java.util
+			n=pairs.getValue();
+			System.out.print(pairs.getKey()+" x"+n.edges.size()+": ");
+			for(int i = 0;i<n.edges.size();++i){
+				System.out.print(n.edges.get(i).to.text+
+						" x"+(int)n.edges.get(i).degreeOfMembership+", ");
+			}
+			System.out.println();
+			it.remove();//avoids a ConcurrentModificationException
+		}
+		//creativity means making mistakes. art is knowing which ones to keep.
+		n = start;
+		for(int i = 0;i<100;++i){
+			System.out.print(n.text+" ");
+			n = n.next();
+		}
+	}
+
+}
