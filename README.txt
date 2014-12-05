@@ -34,3 +34,27 @@ player can pick up usable Items:
 [A idle|sit around]
 [A move|move to target location using A*]
 [A 
+
+	V2f targLoc = target->body.center, agentLoc, delta,futurePosition,alpha;
+		//get the targets actual location
+		agentLoc = a->getCenter();
+		//find the targets future location within one second
+		futurePosition=agentLoc+a->velocity;
+		//find predator's distance from targets future location
+		delta=futurePosition-targLoc;
+		float dist=delta.magnitude();
+		bool reach=false;
+		float time=1;
+		while(!reach){
+		//if the preditor can travel the distance within one second to targets future position exit
+			if(target->maximumSpeed*time>=dist){
+				reach=true;
+			}
+		//if not increase targets position by one time interval and check if preditor can travel within that time
+			futurePosition=futurePosition+a->velocity;
+			alpha=futurePosition-targLoc;
+			dist=alpha.magnitude();
+			time++;
+		}
+		a->acceleration = seek(delta, a);
+		a->acceleration += obstacleAvoidance(&validObstacles, &a->sensorArea, a, 0) * 20;
