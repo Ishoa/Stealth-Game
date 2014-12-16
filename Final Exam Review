@@ -17,9 +17,19 @@ BT: composed of actions:changes the game state; conditions:boolean logic; and lo
 (sequence,selection,parallel,decorator(flips failure or success, or timer)
 Sequence stops in failure if any subtasks fail, stops in success if all subtasks succed
 Selector stops in success if any subtask succeds , stops in failure if all subtasks fail
-parallel is a sequence that does all the tasks simultainiously instead of one at a time.
+parallel is a sequence that does all the tasks simultainiously instead of one at a time. (kinda like behavior tree fuzification)
 PRO
 BT:Flexible AI, novel combinations, scriptable, non-programmers can use it
 FSM: takes less programminger, easier for programemrs
 Con:
 BT: TONS OF PROGRAMMING, NON TRIVIAL
+
+Understanding the second generation of behavior trees
+
+Expert System
+A system created(programmed or scripted) by an expert to solve a problem (knows success will succed)
+In between both:Artificual Neural Network/Genetic Algorithm / Markov Chain 
+Brute Force Solution
+keep trying different solutions and mostly fail until success(usually systematically) if you arnt an expert
+
+Markov Chain : FSM State machine with degree of membership equal to probability (chance of going to a state)
