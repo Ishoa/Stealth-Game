@@ -1,0 +1,25 @@
+FSM  BEHAVIOR TREE
+
+What does it do
+FSM:use multiple programmed behaviors and swap between them.
+BT:uses multiple components of behaviors and uses them in a sequence
+How they are created
+FSM:Hard coded behaviors and state changes
+BT:start with complete parts and script them together.
+Programming Rewqired
+FSM: LOTS
+BT: small after componets finished (finishing the components/ design and structure taeks forever)
+Structure
+FSM: Enter, execute , exit
+BT: enter execute exit :: the execute can return , succes, failure, or waiting (asserts use to return falure or success)
+FSM: composed of different states 
+BT: composed of actions:changes the game state; conditions:boolean logic; and logicical structure
+(sequence,selection,parallel,decorator(flips failure or success, or timer)
+Sequence stops in failure if any subtasks fail, stops in success if all subtasks succed
+Selector stops in success if any subtask succeds , stops in failure if all subtasks fail
+parallel is a sequence that does all the tasks simultainiously instead of one at a time.
+PRO
+BT:Flexible AI, novel combinations, scriptable, non-programmers can use it
+FSM: takes less programminger, easier for programemrs
+Con:
+BT: TONS OF PROGRAMMING, NON TRIVIAL
