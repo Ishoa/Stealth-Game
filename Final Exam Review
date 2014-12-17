@@ -33,3 +33,18 @@ Brute Force Solution
 keep trying different solutions and mostly fail until success(usually systematically) if you arnt an expert
 
 Markov Chain : FSM State machine with degree of membership equal to probability (chance of going to a state)
+Genetic Algorith: start with a Random Population,: with a defined Genome: 
+list of numbers describing state if you cant describe yoru system sas a series of numbers you cant 
+have a genetic algorithm
+Genome: stuff like hp , turn speed, hit rate, etc.. these are the thigns that get merged when mutating for best
+solution.
+Using Fitness Criteria: fitness function should return one sortable value
+example : girl walking down the street is a 7  4 or 3 how good or how bad was it.
+Identifying criteria to determine fitness.
+Make a next population by merging the most fit parents with mutation
+mutation prevents stagnation (slight changes to throw a bit of randomness)
+Artificual Neural Network(neural net) /watch?v=DG5-UyRBQD4
+input nodes Hidden Nodes output nodes 
+nodes and edges with weights
+backpropagation finds the difference in what you got and what you expected to get and 
+goes in reverse finding how this happened. and then try to correct it
